@@ -1,5 +1,14 @@
 <Solution>
-  <Folder Name="/src/">
-    <Project Path="src/LligaManager.Core/LligaManager.Core.csproj" />
+  <Folder Name="/src/1.Domain/">
+    <Project Path="src/1.Domain/LligaManager.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/2.Application/">
+    <Project Path="src/2.Application/LligaManager.Application.csproj" />
+  </Folder>
+  <Folder Name="/src/3.Infrastructure/">
+    <Project Path="src/3.Infrastructure/LligaManager.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/LligaManager.Tests/LligaManager.Tests.csproj" />
   </Folder>
 </Solution>

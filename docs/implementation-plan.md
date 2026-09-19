@@ -120,3 +120,77 @@ dates and use the Domain factory and update methods. The raffle workflow loads
 available candidates and the convocatoria, obtains its configuration through
 an Application abstraction, invokes the Domain `Raffle`, and persists the
 result in one repository save operation.
+
+## UI screens
+
+The desktop UI will use **WinUI 3 with Windows App SDK**, the native modern
+Windows desktop UI stack. The UI is kept as a separate executable project
+under the Infrastructure area so it can reference Application and Domain
+without making the persistence library depend on the executable.
+
+The WinUI project requires Visual Studio's **Desktop development with C++**
+workload and the Windows 10/11 SDK. The .NET SDK alone is sufficient for the
+Domain, Application, Infrastructure, and test projects, but it cannot build
+the WinUI project because the Windows App SDK XAML compiler requires the
+native MSVC tooling.
+
+WinUI generates the UI entry point and dispatcher bootstrap for the executable;
+the project must not add a second `Program.Main`. `App` configures dependency
+injection for logging, SQLite, `LligaManagerDbContext`, repositories, and the
+convocatoria configuration provider. Windows and pages are resolved from that
+service provider instead of constructing application services directly in the
+UI.
+
+Domain services such as `Raffle` are registered in the UI composition root and
+injected into Application use cases. Use cases must not instantiate Domain
+services directly, so their dependencies remain explicit and replaceable in
+tests.
+
+The current scope contains one team and one league. The UI must not include
+selectors or management screens for multiple teams or competitions.
+
+### Home
+
+The home screen provides an overview of the single league. It can show the
+general current state, upcoming convocatorias, recent status information, and
+navigation to players and convocatorias.
+
+### Players
+
+The players screen allows the user to:
+
+- consult registered players;
+- create players;
+- edit player data;
+- consult and change player status;
+- consult roles and observations;
+- consult the priority assigned by the raffle.
+
+Player data that can be edited together should be presented in one form and
+saved through one application use case.
+
+### Convocatorias
+
+The convocatorias screen shows the automatically generated calendar of
+convocatorias. Each convocatoria can show its date, status, observations, and
+whether raffle results have already been assigned.
+
+Convocatorias are all possible Wednesdays from September through June,
+including both boundary months. They are not created manually one by one from
+the normal UI flow.
+
+### Convocatoria details
+
+The detail screen shows the selected convocatoria's date, status, observations,
+current players, raffle winners, and raffle losers. It also provides the
+action to execute the raffle when the convocatoria is pending.
+
+Executing the raffle can be presented as an action or confirmation dialog
+inside this screen. The result must clearly separate winners and losers, and
+the UI must communicate errors because raffle results cannot be reassigned
+once they have been stored.
+
+### Out of scope for the current UI
+
+The current scope does not include screens for team management, competition
+selection or management, matchdays, matches, match results, or standings.

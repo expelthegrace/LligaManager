@@ -11,6 +11,7 @@ public sealed class ExecuteConvocatoriaRaffle(
     IConvocatoriaRepository convocatoriaRepository,
     IPlayerRepository playerRepository,
     IConvocatoriaConfigurationProvider configurationProvider,
+    Raffle raffle,
     ILogger<ExecuteConvocatoriaRaffle>? logger = null)
 {
     private readonly ILogger<ExecuteConvocatoriaRaffle> logger =
@@ -28,7 +29,7 @@ public sealed class ExecuteConvocatoriaRaffle(
         var candidates = await playerRepository.GetAllAvailableAsync(cancellationToken);
         var configuration = configurationProvider.Load();
 
-        new Raffle().Execute(candidates, convocatoria, configuration);
+        raffle.Execute(candidates, convocatoria, configuration);
         await convocatoriaRepository.SaveChangesAsync(cancellationToken);
         logger.LogInformation(
             "Raffle executed for convocatoria {ConvocatoriaId}: {WinnerCount} winners, {LoserCount} losers.",

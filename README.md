@@ -15,8 +15,18 @@ La solución se organiza en tres capas:
 - `src/3.Infrastructure`: persistencia SQLite, UI, localización y logging.
 
 Los tests se encuentran en `tests/LligaManager.Tests`. La aplicación WinUI 3
-se añadirá dentro de Infrastructure desde Visual Studio usando la plantilla
-**Blank App, Packaged (WinUI 3 in Desktop)**.
+se encuentra en `src/3.Infrastructure/LligaManager.UI` y usa Windows App SDK.
+Para compilarla desde Visual Studio es necesario instalar la carga de trabajo
+**Desktop development with C++** y el Windows 10/11 SDK.
+
+Para trabajar desde Visual Studio, abre `LligaManager.sln` y selecciona la
+plataforma `x64`. `LligaManager.slnx` se conserva como formato XML de solución,
+pero la solución `.sln` incluye las configuraciones tradicionales de Visual
+Studio necesarias para compilar la aplicación WinUI.
+
+Rider puede compilar la solución usando su MSBuild del SDK de .NET. El proyecto
+UI incluye una ruta condicional a las tareas AppX/PRI instaladas por Visual
+Studio para que también funcione con ese MSBuild.
 
 ## Desarrollo
 

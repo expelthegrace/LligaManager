@@ -1,0 +1,108 @@
+<Window
+    x:Class="LligaManager.UI.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="LligaManager">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Background="{ThemeResource LligaManagerSidebarBrush}">
+            <StackPanel Padding="24,32">
+                <TextBlock
+                    Text="LligaManager"
+                    FontSize="24"
+                    FontWeight="SemiBold" />
+                <TextBlock
+                    Margin="0,4,0,32"
+                    Text="Gestión de la liga"
+                    Opacity="0.7" />
+
+                <NavigationView IsPaneOpen="True" IsPaneToggleButtonVisible="False">
+                    <NavigationView.MenuItems>
+                        <NavigationViewItem Content="Inicio" IsSelected="True">
+                            <NavigationViewItem.Icon>
+                                <SymbolIcon Symbol="Home" />
+                            </NavigationViewItem.Icon>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Jugadores">
+                            <NavigationViewItem.Icon>
+                                <SymbolIcon Symbol="People" />
+                            </NavigationViewItem.Icon>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Convocatorias">
+                            <NavigationViewItem.Icon>
+                                <SymbolIcon Symbol="Calendar" />
+                            </NavigationViewItem.Icon>
+                        </NavigationViewItem>
+                    </NavigationView.MenuItems>
+                </NavigationView>
+            </StackPanel>
+        </Border>
+
+        <ScrollViewer Grid.Column="1">
+            <StackPanel Padding="48,40,48,48" MaxWidth="1100">
+                <TextBlock Text="Inicio" FontSize="32" FontWeight="SemiBold" />
+                <TextBlock
+                    Margin="0,8,0,32"
+                    Text="Estado actual de la liga"
+                    FontSize="16"
+                    Opacity="0.7" />
+
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="0" Padding="20" CornerRadius="8"
+                            Background="{ThemeResource LligaManagerCardBrush}">
+                        <StackPanel>
+                            <TextBlock Text="Próxima convocatoria" Opacity="0.7" />
+                            <TextBlock Margin="0,12,0,0" Text="—" FontSize="28" />
+                            <TextBlock Margin="0,4,0,0" Text="Sin datos cargados" />
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="1" Padding="20" CornerRadius="8"
+                            Background="{ThemeResource LligaManagerCardBrush}">
+                        <StackPanel>
+                            <TextBlock Text="Jugadores disponibles" Opacity="0.7" />
+                            <TextBlock Margin="0,12,0,0" Text="—" FontSize="28" />
+                            <TextBlock Margin="0,4,0,0" Text="Sin datos cargados" />
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="2" Padding="20" CornerRadius="8"
+                            Background="{ThemeResource LligaManagerCardBrush}">
+                        <StackPanel>
+                            <TextBlock Text="Estado" Opacity="0.7" />
+                            <TextBlock Margin="0,12,0,0" Text="Preparada" FontSize="28" />
+                            <TextBlock Margin="0,4,0,0" Text="Una liga · Un equipo" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <TextBlock
+                    Margin="0,40,0,12"
+                    Text="Próximas convocatorias"
+                    FontSize="20"
+                    FontWeight="SemiBold" />
+                <Border Padding="24" CornerRadius="8"
+                        Background="{ThemeResource LligaManagerCardBrush}">
+                    <StackPanel>
+                        <TextBlock Text="Las convocatorias se generan automáticamente para los miércoles de septiembre a junio." />
+                        <TextBlock
+                            Margin="0,8,0,0"
+                            Text="Cuando existan convocatorias, aparecerán aquí."
+                            Opacity="0.7" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

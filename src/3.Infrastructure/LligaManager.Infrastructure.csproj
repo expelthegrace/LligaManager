@@ -15,6 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="LligaManager.UI\**\*.cs" />
+    <EmbeddedResource Remove="LligaManager.UI\**\*" />
+    <None Remove="LligaManager.UI\**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Persistence\convocatoria-config.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

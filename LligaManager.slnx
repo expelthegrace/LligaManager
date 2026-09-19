@@ -7,6 +7,7 @@
   </Folder>
   <Folder Name="/src/3.Infrastructure/">
     <Project Path="src/3.Infrastructure/LligaManager.Infrastructure.csproj" />
+    <Project Path="src/3.Infrastructure/LligaManager.UI/LligaManager.UI.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/LligaManager.Tests/LligaManager.Tests.csproj" />

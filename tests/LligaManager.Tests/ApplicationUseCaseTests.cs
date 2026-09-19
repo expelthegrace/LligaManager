@@ -56,7 +56,8 @@ public sealed class ApplicationUseCaseTests
         var result = await new ExecuteConvocatoriaRaffle(
             convocatorias,
             players,
-            new FixedConfigurationProvider(1)).ExecuteAsync(convocatoria.Id);
+            new FixedConfigurationProvider(1),
+            new Raffle(new Random(1))).ExecuteAsync(convocatoria.Id);
 
         Assert.Single(result.RaffleWinners);
         Assert.Single(result.RaffleLosers);

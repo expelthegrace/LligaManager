@@ -52,3 +52,71 @@ Raffle:
 - priority: 1) available players marked as high prio, random if they are more than max players per convocatoria. 2) rest of the available players also random between them.
 - winners get their prio set to normal
 - losers get their prio set to  high
+
+ #2.application
+ usecases, these usecases should be the orquestration for the user inputs. they also should load entities, orquestrate domain calls, catch exceptions (and replicate them up) and manage persistence. 
+ note: UI has petitions to modify raw values. I don't want public setters for entities. always use ubiquitous language methods and ensure invariants if needed. 
+
+## Application use cases
+
+A use case represents a user intention or an application workflow, not every
+individual property that can be edited. When a screen edits several related
+values, they should be handled by one atomic use case that loads the entity,
+invokes its ubiquitous-language methods, and persists the complete change.
+
+The initial use cases for the current domain are:
+
+### Player
+
+- `CreatePlayer`
+- `UpdatePlayer`
+- `GetPlayers`
+- `GetPlayerDetails`
+
+### Convocatoria
+
+- `CreateConvocatoria`
+- `UpdateConvocatoria`
+- `GetConvocatorias`
+- `GetConvocatoriaDetails`
+- `ExecuteConvocatoriaRaffle`
+
+`ExecuteConvocatoriaRaffle` is a separate workflow because it loads candidates,
+invokes the Domain `Raffle` service, changes several entities, and persists the
+result. Player priority changes are not exposed as an independent UI use case;
+they are controlled by the raffle rules.
+
+Use cases must:
+
+- receive raw input models suitable for the UI;
+- load entities through Application repository abstractions;
+- create entities through Domain factories;
+- call Domain methods instead of using public setters;
+- persist successful changes atomically;
+- log the application flow and propagate errors to the UI.
+
+Repository implementations, SQLite, EF Core, and persistence logging belong to
+Infrastructure. The same grouping principle will be applied later to
+competition, team, matchday, match, result, and standings workflows when those
+Domain entities exist.
+
+### Implemented vertical slice
+
+The current Application layer implements:
+
+- `CreatePlayer`
+- `UpdatePlayer`
+- `GetPlayers`
+- `GetPlayerDetails`
+- `CreateConvocatoria`
+- `UpdateConvocatoria`
+- `GetConvocatorias`
+- `GetConvocatoriaDetails`
+- `ExecuteConvocatoriaRaffle`
+
+The player workflows validate duplicate names and use the Domain methods for
+editable details and status. The convocatoria workflows validate duplicate
+dates and use the Domain factory and update methods. The raffle workflow loads
+available candidates and the convocatoria, obtains its configuration through
+an Application abstraction, invokes the Domain `Raffle`, and persists the
+result in one repository save operation.

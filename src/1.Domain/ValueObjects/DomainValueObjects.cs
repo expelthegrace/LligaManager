@@ -28,7 +28,8 @@ public readonly record struct ConvocatoriaDate
 }
 public readonly record struct Observations
 {
-    public string Value { get; }
-    public Observations(string? value) => Value = value?.Trim() ?? string.Empty;
+    private readonly string? _value;
+    public string Value => _value ?? string.Empty;
+    public Observations(string? value) => _value = value?.Trim() ?? string.Empty;
     public override string ToString() => Value;
 }

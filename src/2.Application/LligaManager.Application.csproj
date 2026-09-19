@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\1.Domain\LligaManager.Domain.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.12" />
   </ItemGroup>
 
 </Project>

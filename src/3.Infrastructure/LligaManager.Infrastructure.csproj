@@ -11,6 +11,7 @@
     <ProjectReference Include="..\2.Application\LligaManager.Application.csproj" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.12" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.12" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.12" />
   </ItemGroup>
 
   <ItemGroup>
